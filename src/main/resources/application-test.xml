@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" lazy-init="false">
+        <property name="locations">
+            <list>
+                <value>properties/db.properties</value>
+                <value>properties/kafka.properties</value>
+                <value>properties/constant.properties</value>
+                <value>properties/thrift.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="UTF-8"/>
+    </bean>
+
+    <!-- **************************** spring配置 start *************************** -->
+    <!-- 数据库配置 -->
+    <import resource="datasource.xml"/>
+
+    <!-- Kafka消费者 -->
+    <!--<import resource="consumer/consumer-executor.xml"/>-->
+    <!-- **************************** spring配置 end   *************************** -->
+
+    <!-- 启动对@AspectJ注解的支持 -->
+    <aop:aspectj-autoproxy/>
+
+    <!-- 开启自动扫描 autowire 配置 -->
+    <context:component-scan base-package="com.calvin.service"/>
+
+</beans>

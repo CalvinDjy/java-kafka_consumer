@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--日志消费者-->
+    <bean id="logConsumer" class="com.calvin.service.consumers.consumer.Log.LogConsumer" scope="prototype">
+        <constructor-arg>
+            <list>
+                <bean id="logPrint" class="com.calvin.service.consumers.consumer.Log.Handler.LogHandler"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>
